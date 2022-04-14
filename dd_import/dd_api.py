@@ -100,10 +100,12 @@ class Api:
     def update_engagement(self, engagement):
         if self.environment.build_id is not None or \
            self.environment.commit_hash is not None or \
-           self.environment.commit_hash is not None:
+           self.environment.branch_tag is not None or \
+           self.environment.repo is not None:
             payload = {'build_id': self.environment.build_id,
                        'commit_hash': self.environment.commit_hash,
-                       'branch_tag': self.environment.branch_tag}
+                       'branch_tag': self.environment.branch_tag,
+                       'source_code_management_uri': self.environment.repo}
             r = requests.patch(self.engagement_url + str(engagement) + '/',
                                headers=self.headers,
                                data=json.dumps(payload),
