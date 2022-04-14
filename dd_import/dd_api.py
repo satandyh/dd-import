@@ -26,7 +26,7 @@ class Api:
         r = requests.get(self.product_type_url,
                          headers=self.headers,
                          params=payload,
-                         verify=self.environment.skip_tls)
+                         verify=self.environment.verify_tls)
         r.raise_for_status()
         product_type_data = json.loads(r.text)
         for product_type in product_type_data.get('results', []):
@@ -42,7 +42,7 @@ class Api:
         r = requests.get(self.product_url,
                          headers=self.headers,
                          params=payload,
-                         verify=self.environment.skip_tls)
+                         verify=self.environment.verify_tls)
         r.raise_for_status()
         product_data = json.loads(r.text)
         for product in product_data.get('results', []):
@@ -59,7 +59,7 @@ class Api:
         r = requests.post(self.product_url,
                           headers=self.headers,
                           data=json.dumps(payload),
-                          verify=self.environment.skip_tls)
+                          verify=self.environment.verify_tls)
         r.raise_for_status()
         product_data = json.loads(r.text)
         print('New product,        id: ', product_data['id'])
@@ -71,7 +71,7 @@ class Api:
         r = requests.get(self.engagement_url,
                          headers=self.headers,
                          params=payload,
-                         verify=self.environment.skip_tls)
+                         verify=self.environment.verify_tls)
         r.raise_for_status()
         engagement_data = json.loads(r.text)
         for engagement in engagement_data.get('results', []):
@@ -91,7 +91,7 @@ class Api:
         r = requests.post(self.engagement_url,
                           headers=self.headers,
                           data=json.dumps(payload),
-                          verify=self.environment.skip_tls)
+                          verify=self.environment.verify_tls)
         r.raise_for_status()
         engagement_data = json.loads(r.text)
         print('New engagement,     id: ', engagement_data['id'])
@@ -107,7 +107,7 @@ class Api:
             r = requests.patch(self.engagement_url + str(engagement) + '/',
                                headers=self.headers,
                                data=json.dumps(payload),
-                               verify=self.environment.skip_tls)
+                               verify=self.environment.verify_tls)
             r.raise_for_status()
 
     def get_test(self, engagement):
@@ -116,7 +116,7 @@ class Api:
         r = requests.get(self.test_url,
                          headers=self.headers,
                          params=payload,
-                         verify=self.environment.skip_tls)
+                         verify=self.environment.verify_tls)
         r.raise_for_status()
         test_data = json.loads(r.text)
         for test in test_data.get('results', []):
@@ -138,7 +138,7 @@ class Api:
         r = requests.post(self.test_url,
                           headers=self.headers,
                           data=json.dumps(payload),
-                          verify=self.environment.skip_tls)
+                          verify=self.environment.verify_tls)
         r.raise_for_status()
         test_data = json.loads(r.text)
         print('New test,           id: ', test_data['id'])
@@ -149,7 +149,7 @@ class Api:
         r = requests.get(self.test_type_url,
                          headers=self.headers,
                          params=payload,
-                         verify=self.environment.skip_tls)
+                         verify=self.environment.verify_tls)
         r.raise_for_status()
         test_type_data = json.loads(r.text)
         for test_type in test_type_data.get('results', []):
@@ -183,12 +183,12 @@ class Api:
                                      headers=self.headers_without_json,
                                      data=payload,
                                      files=files,
-                                     verify=self.environment.skip_tls)
+                                     verify=self.environment.verify_tls)
         else:
             response = requests.post(self.reimport_scan_url,
                                      headers=self.headers_without_json,
                                      data=payload,
-                                     verify=self.environment.skip_tls)
+                                     verify=self.environment.verify_tls)
 
         response.raise_for_status()
 
@@ -205,7 +205,7 @@ class Api:
                                  headers=self.headers_without_json,
                                  data=payload,
                                  files=files,
-                                 verify=self.environment.skip_tls)
+                                 verify=self.environment.verify_tls)
         response.raise_for_status()
 
         print()
