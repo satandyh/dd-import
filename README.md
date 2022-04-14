@@ -74,6 +74,7 @@ All parameters need to be provided as environment variables
 | DD_COMMIT_HASH        | Optional           | -                | |
 | DD_BRANCH_TAG         | Optional           | -                | |
 | DD_VERIFY_TLS         | Optional           | -                | Default: `false` |
+| DD_REPO               | Optional           | -                | |
 
 ### Usage
 
